@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Animation</title>
+    <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+    <div class="container">
+        <svg id="shopSystemSvg" width="100%" height="500" viewBox="0 0 1150 500" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
+                    <feMerge>
+                        <feMergeNode in="coloredBlur" />
+                        <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                </filter>
+            </defs>
+        </svg>
+        <div class="shopsysteme-container">
+            <div class="shopsysteme-container__content">
+                <div class="subtitle">Ausgewählt</div>
+                <div class="title">13 Shopsysteme</div>
+                <div class="line"></div>
+                <div class="plugin-btn">
+                    <img class="plugin-icon" src="./assets/plugin_ic.png">
+                    <span>Plugins</span>
+                </div>
+            </div>
+
+        </div>
+        <div class="system-btn">
+            <img class="plugin-icon" src="./assets/system_ic.png">
+            <span>SHOPSYSTEMS</span>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+
+</html>
