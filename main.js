@@ -1,38 +1,70 @@
 const svgNS = "http://www.w3.org/2000/svg";
 const pathsData = [
-  "M 555 10 L 190 10 C 10 10 10 0 10 190 L 10 356",
-  "M 555 30 L 190 30 C 110 30 110 110 110 190 L 110 356",
-  "M 555 50 L 280 52 C 210 50 210 90 210 210 L 210 356",
-  "M 555 70 L 370 70 C 305 70 305 90 305 305 L 305 356",
-
-  "M 500 90 C 500 356 395 90 395 356",
-  "M 560 90 C 560 356 485 90 485 356",
-
-  "M 580 90 V 356",
-
-  "M 600 90 C 600 356 675 90 675 356",
-  "M 660 90 C 660 356 775 90 775 356",
-
-  "M 600 10 L 965 10 C 1145 10 1145 0 1145 190 L 1145 356",
-  "M 600 30 L 965 30 C 1055 30 1055 30 1055 190 L 1055 356",
-  "M 600 50 L 875 50 C 965 53 965 114 965 190 L 965 356",
-  "M 600 70 L 785 70 C 875 70 875 70 875 190 L 875 356",
-];
-
-const logosData = [
-  "./assets/commerce_tools_ic.png",
-  "./assets/shopware.png",
-  "./assets/dan_domain_ic.png",
-  "./assets/plentymarkets_ic.png",
-  "./assets/ccv_shop_ic.png",
-  "./assets/magento_ic.png",
-  "./assets/shopify_ic.png",
-  "./assets/woocommerce_ic.png",
-  "./assets/opencart_ic.png",
-  "./assets/xt_ic.jpeg",
-  "./assets/oxid.jpeg",
-  "./assets/prestashop_ic.webp",
-  "./assets/jtl_ic.png",
+  {
+    name: "Commmerce Tools",
+    icon: "./assets/commerce_tools_ic.png",
+    path: "M 555 10 L 190 10 C 10 10 10 0 10 190 L 10 356",
+  },
+  {
+    name: "Shopware",
+    icon: "./assets/shopware.png",
+    path: "M 555 30 L 190 30 C 110 30 110 110 110 190 L 110 356",
+  },
+  {
+    name: "Dan Domain",
+    icon: "./assets/dan_domain_ic.png",
+    path: "M 555 50 L 280 52 C 210 50 210 90 210 210 L 210 356",
+  },
+  {
+    name: "Plentymarkets",
+    icon: "./assets/plentymarkets_ic.png",
+    path: "M 555 70 L 370 70 C 305 70 305 90 305 305 L 305 356",
+  },
+  {
+    name: "CCV Shop",
+    icon: "./assets/ccv_shop_ic.png",
+    path: "M 500 90 C 500 356 395 90 395 356",
+  },
+  {
+    name: "Magento",
+    icon: "./assets/magento_ic.png",
+    path: "M 560 90 C 560 356 485 90 485 356",
+  },
+  {
+    name: "Shopify",
+    icon: "./assets/shopify_ic.png",
+    path: "M 580 90 V 356",
+  },
+  {
+    name: "WooCommerce",
+    icon: "./assets/woocommerce_ic.png",
+    path: "M 600 90 C 600 356 675 90 675 356",
+  },
+  {
+    name: "OpenCart",
+    icon: "./assets/opencart_ic.png",
+    path: "M 660 90 C 660 356 775 90 775 356",
+  },
+  {
+    name: "xt:Commerce",
+    icon: "./assets/xt_ic.jpeg",
+    path: "M 600 10 L 965 10 C 1145 10 1145 0 1145 190 L 1145 356",
+  },
+  {
+    name: "OXID",
+    icon: "./assets/oxid.jpeg",
+    path: "M 600 30 L 965 30 C 1055 30 1055 30 1055 190 L 1055 356",
+  },
+  {
+    name: "Presta Shop",
+    icon: "./assets/prestashop_ic.webp",
+    path: "M 600 50 L 875 50 C 965 53 965 114 965 190 L 965 356",
+  },
+  {
+    name: "JTL",
+    icon: "./assets/jtl_ic.png",
+    path: "M 600 70 L 785 70 C 875 70 875 70 875 190 L 875 356",
+  },
 ];
 
 const svgElement = document.getElementById("shopSystemSvg");
@@ -51,8 +83,8 @@ function createAnimatedCircle(radius, pathId, duration) {
   const circle = document.createElementNS(svgNS, "circle");
   circle.setAttribute("class", "light");
   circle.setAttribute("r", radius);
-  circle.style.filter = "url(#glow)"; 
-  
+  circle.style.filter = "url(#glow)";
+
   const animateMotion = document.createElementNS(svgNS, "animateMotion");
   animateMotion.setAttribute("dur", duration);
   animateMotion.setAttribute("repeatCount", "indefinite");
@@ -70,7 +102,7 @@ function createAnimatedCircle(radius, pathId, duration) {
   svgElement.appendChild(circle);
 }
 
-function createPathWithImage(id, d, imageUrl) {
+function createPathWithImage(id, d, imageUrl, name) {
   const path = document.createElementNS(svgNS, "path");
   path.setAttribute("id", id);
   path.setAttribute("class", "path");
@@ -114,11 +146,21 @@ function createPathWithImage(id, d, imageUrl) {
 
   // Append the foreignObject to the SVG
   svgElement.appendChild(foreignObject);
+
+  // New code for adding text below the circle image
+  const text = document.createElementNS(svgNS, "text");
+  text.setAttribute("x", point.x);
+  text.setAttribute("y", point.y + 60); // Position below the image
+  text.setAttribute("class", "name"); // Add a class for styling
+  text.setAttribute("text-anchor", "middle"); // Center the text under the image
+  text.textContent = name;
+
+  svgElement.appendChild(text);
 }
 
 // Create paths and circles with animations
 pathsData.forEach((pathData, index) => {
-  createPath(`path${index}`, pathData);
+  createPath(`path${index}`, pathData.path);
   createAnimatedCircle(3, `path${index}`, "4s");
-  createPathWithImage(`path${index}`, pathData, logosData[index]);
+  createPathWithImage(`path${index}`, pathData.path, pathData.icon, pathData.name);
 });

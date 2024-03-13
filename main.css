@@ -116,3 +116,9 @@ body {
     margin-bottom: 12px;
     background-color: #756251;
 }
+
+.name {
+    font-size: 12px;
+    fill: #B0B0AF;
+    font-family: sans-serif;
+}
